@@ -21,7 +21,16 @@
         android:gravity="center"
         android:background="@color/white">
 
+        <!-- Category Selection Dropdown (Now above the flashcard) -->
+
         <!-- Flashcard Container -->
+        <Spinner
+            android:id="@+id/category_filter_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:spinnerMode="dropdown" />
+
         <FrameLayout
             android:layout_width="300dp"
             android:layout_height="200dp"
@@ -67,6 +76,16 @@
                     android:textSize="16sp"
                     android:textStyle="italic"/>
             </LinearLayout>
+            <TextView
+                android:id="@+id/card_counter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card 1/1"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="8dp"/>
+
         </FrameLayout>
 
         <Button
@@ -75,14 +94,15 @@
             android:layout_height="wrap_content"
             android:text="Flip Card"
             android:layout_gravity="center"/>
+
         <Button
             android:id="@+id/next_card_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next Card"
-            android:layout_gravity="center"
             android:layout_below="@id/flip_button"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:text="Next Card" />
 
     </LinearLayout>
 

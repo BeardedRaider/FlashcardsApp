@@ -5,16 +5,33 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Question input -->
     <EditText
-        android:id="@+id/dialog_question_input"
+        android:id="@+id/question_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter question"/>
+        android:hint="Enter Question"
+        android:inputType="text" />
 
+    <!-- Answer input -->
     <EditText
-        android:id="@+id/dialog_answer_input"
+        android:id="@+id/answer_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter answer"/>
+        android:hint="Enter Answer"
+        android:inputType="text" />
+
+    <!-- Category Spinner (Dropdown) -->
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Save button -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Card" />
 
 </LinearLayout>
