@@ -314,28 +314,28 @@ class MainActivity : AppCompatActivity() {
      */
     private fun filterFlashcardsByCategory(category: String) {
         val filteredFlashcards = if (category == "Show All") {
-            // If the category is "Show All", return the original list of flashcards
             flashcards
         } else {
-            // Otherwise, filter the list of flashcards to only include those with the given category
             flashcards.filter { it.category == category }
         }
 
-        // If there are filtered flashcards, update the UI to show the first one
+        val cardCounterText = findViewById<TextView>(R.id.card_counter)
+
         if (filteredFlashcards.isNotEmpty()) {
-            // Set the current index to 0, so that we show the first card
             currentCardIndex = 0
-            // Call the updateUIWithFilteredCards function to update the UI
             updateUIWithFilteredCards(filteredFlashcards)
         } else {
-            // If there are no filtered flashcards, show a message indicating that no flashcards were found
             questionText.text = "No flashcards found for this category."
             answerText.text = ""
-            // Make sure the front card is visible and the back card is not
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
+            isFlipped = false
+
+            // ✅ Hide the counter when no flashcards exist
+            cardCounterText.visibility = View.GONE
         }
     }
+
 
     /**
      * Updates the UI to reflect the current state of the filtered flashcards.
@@ -344,36 +344,33 @@ class MainActivity : AppCompatActivity() {
      * It also updates the visibility of the card views and the card counter text.
      */
     private fun updateUIWithFilteredCards(filteredFlashcards: List<Flashcard>) {
+        val cardCounterText = findViewById<TextView>(R.id.card_counter)
+
         if (filteredFlashcards.isNotEmpty()) {
-            // Show the current flashcard
             val currentFlashcard = filteredFlashcards[currentCardIndex]
             questionText.text = "Q. ${currentFlashcard.question}"
             answerText.text = "A. ${currentFlashcard.answer}"
-
-            // Update the visibility of the card views
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
-
-            // Update the card counter text
-            val cardCounterText = findViewById<TextView>(R.id.card_counter)
-            cardCounterText.text = "Card ${currentCardIndex + 1}/${filteredFlashcards.size}"
-
-            // Update the next card button to be enabled if there are more cards
+            isFlipped = false
             findViewById<Button>(R.id.next_card_button).isEnabled = filteredFlashcards.size > 1
+
+            // ✅ Show counter
+            cardCounterText.text = "Card ${currentCardIndex + 1}/${filteredFlashcards.size}"
+            cardCounterText.visibility = View.VISIBLE
         } else {
-            // Show a message indicating that no flashcards were found
             questionText.text = "No flashcards found."
             answerText.text = ""
-
-            // Update the visibility of the card views
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
+            isFlipped = false
 
-            // Reset the card counter text
-            val cardCounterText = findViewById<TextView>(R.id.card_counter)
-            cardCounterText.text = ""
+            // ✅ Hide counter when no cards exist
+            cardCounterText.text = ""  // Optional: Clear text
+            cardCounterText.visibility = View.GONE
         }
     }
+
 
 
 
@@ -384,25 +381,29 @@ class MainActivity : AppCompatActivity() {
      * It also updates the visibility of the card views and the card counter text.
      */
     private fun updateUI() {
+        val cardCounterText = findViewById<TextView>(R.id.card_counter)
+
         if (flashcards.isNotEmpty()) {
             val currentFlashcard = flashcards[currentCardIndex]
             questionText.text = "Q. ${currentFlashcard.question}"
             answerText.text = "A. ${currentFlashcard.answer}"
-
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
             isFlipped = false
             findViewById<Button>(R.id.next_card_button).isEnabled = flashcards.size > 1
 
-            // Update card counter
-            val cardCounterText = findViewById<TextView>(R.id.card_counter)
+            // ✅ Show counter
             cardCounterText.text = "Card ${currentCardIndex + 1}/${flashcards.size}"
+            cardCounterText.visibility = View.VISIBLE
         } else {
             questionText.text = "No flashcards available."
             answerText.text = ""
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
             isFlipped = false
+
+            // ✅ Hide counter when no cards
+            cardCounterText.visibility = View.GONE
         }
     }
 
