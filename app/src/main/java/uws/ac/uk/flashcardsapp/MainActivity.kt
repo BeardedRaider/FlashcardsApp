@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.action_clear_flashcards -> {
-                showClearFlashcardsDialog()
+                clearFlashcards() // Call the correct function
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -107,33 +107,65 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showClearFlashcardsDialog() {
-        val options = arrayOf("Clear All Flashcards", "Clear by Category")
+
+
+    private fun clearFlashcards() {
+        val options = arrayOf("Clear All Flashcards", "Clear Flashcards by Category", "Cancel")
+
         AlertDialog.Builder(this)
             .setTitle("Clear Flashcards")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> confirmClearFlashcards(true)
-                    1 -> confirmClearFlashcards(false)
+                    0 -> confirmClearAllFlashcards()  // Clear all flashcards
+                    1 -> showCategoryClearDialog()    // Clear by category
+                    2 -> {} // Cancel - do nothing
                 }
+            }
+            .show()
+    }
+
+    // Step 1: Confirm before clearing all flashcards
+    private fun confirmClearAllFlashcards() {
+        AlertDialog.Builder(this)
+            .setTitle("Warning")
+            .setMessage("This will permanently delete all flashcards. Are you sure?")
+            .setPositiveButton("Clear") { _, _ ->
+                flashcards.clear()
+                saveFlashcards()
+                updateUI()
+                Toast.makeText(this, "All flashcards deleted", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    private fun confirmClearFlashcards(clearAll: Boolean) {
+    // Step 2: Show category selection for deletion
+    private fun showCategoryClearDialog() {
+        val availableCategories = flashcards.map { it.category }.distinct()
+
+        if (availableCategories.isEmpty()) {
+            Toast.makeText(this, "No categories available to clear", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         AlertDialog.Builder(this)
-            .setTitle("Are you sure?")
-            .setMessage("This will permanently erase flashcards. This action cannot be undone.")
+            .setTitle("Select Category to Clear")
+            .setItems(availableCategories.toTypedArray()) { _, index ->
+                confirmClearCategory(availableCategories[index])
+            }
+            .show()
+    }
+
+    // Step 3: Confirm before deleting a category
+    private fun confirmClearCategory(category: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Warning")
+            .setMessage("This will permanently delete all flashcards in '$category'. Are you sure?")
             .setPositiveButton("Clear") { _, _ ->
-                if (clearAll) {
-                    flashcards.clear()
-                } else {
-                    val selectedCategory = categoryFilterSpinner.selectedItem.toString()
-                    flashcards.removeAll { it.category == selectedCategory }
-                }
+                flashcards.removeAll { it.category == category }
                 saveFlashcards()
                 updateUI()
+                Toast.makeText(this, "Deleted all flashcards in $category", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)
             .show()
@@ -192,7 +224,7 @@ class MainActivity : AppCompatActivity() {
             currentCardIndex = 0
             updateUIWithFilteredCards(filteredFlashcards)
         } else {
-            questionText.text = "No flashcards found for this category."
+            questionText.text = "No flashcards found for this category, please add some via the menu bar at the top of the screen."
             answerText.text = ""
             frontCard.visibility = View.VISIBLE
             backCard.visibility = View.GONE
