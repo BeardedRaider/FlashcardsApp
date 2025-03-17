@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="teal_200">#80CBC4</color>
     <color name="teal_700">#00796B</color>
+
+    <!-- Light Mode Colors -->
+    <color name="light_background">#F2F2F2</color>
+    <color name="light_text">#000000</color>
+    <color name="light_toolbar">#00796B</color>
+
+    <!-- Dark Mode Colors -->
+    <color name="dark_background">#121212</color>
+    <color name="dark_text">#FFFFFF</color>
+    <color name="dark_toolbar">#000000</color>
 </resources>

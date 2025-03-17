@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This animation is used to flip the card when the user wants to see the other side -->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        This object animator is used to rotate the card view around the Y axis.
+        The rotation starts from 0 and ends at 180 degrees.
+        The animation takes 500 milliseconds to complete.
+        The repeatCount is set to 0, meaning the animation will only play once.
+        The interpolator is set to accelerate_quad, which means the animation will start slowly and accelerate towards the end.
+    -->
     <objectAnimator
         android:propertyName="rotationY"
         android:duration="500"

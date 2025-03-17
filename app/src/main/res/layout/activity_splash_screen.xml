@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Root layout using ConstraintLayout -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +9,7 @@
     android:background="@color/black"
     tools:context=".SplashScreen">
 
+    <!-- Full-screen ImageView for the splash screen logo -->
     <ImageView
         android:id="@+id/imageSplash"
         android:layout_width="match_parent"

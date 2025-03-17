@@ -7,6 +7,10 @@ import android.os.Looper
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 
+/**
+ * This activity is shown when the app is launched. It displays a full-screen splash
+ * screen with the app's logo for a few seconds, then navigates to the main activity.
+ */
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,9 +24,12 @@ class SplashScreen : AppCompatActivity() {
 
         // Delay for 3 seconds, then navigate to MainActivity
         Handler(Looper.getMainLooper()).postDelayed({
+            // Create an intent to navigate to MainActivity
             val intent = Intent(this, MainActivity::class.java)
+            // Start the activity
             startActivity(intent)
-            finish() // Close SplashScreen activity
+            // Close SplashScreen activity
+            finish()
         }, 3000) // Adjust delay as needed
     }
 }

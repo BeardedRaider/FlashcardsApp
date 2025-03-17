@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- This animation is used to flip the card in when it is first shown. -->
 <set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Animate the rotationY property from -180 to 0 degrees -->
+    <!-- This will make the card appear to flip in from the left -->
     <objectAnimator
         android:propertyName="rotationY"
         android:duration="500"

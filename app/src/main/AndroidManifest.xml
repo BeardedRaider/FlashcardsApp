@@ -16,7 +16,7 @@
         <!-- Splash Screen Activity -->
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:theme="@style/Theme.FlashcardsApp"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

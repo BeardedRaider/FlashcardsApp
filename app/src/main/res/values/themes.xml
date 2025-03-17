@@ -1,9 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.FlashcardsApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@color/light_background</item>
+        <item name="android:textColorPrimary">@color/light_text</item>
+        <item name="android:colorPrimary">@color/teal_700</item>
+        <item name="android:colorAccent">@color/teal_200</item>
+        <item name="android:toolbarStyle">@style/ToolbarStyle</item>
+
+
     </style>
 
     <style name="Theme.FlashcardsApp" parent="Base.Theme.FlashcardsApp" />
+
+    <!-- Toolbar Style -->
+    <style name="ToolbarStyle" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/teal_700</item>
+        <item name="android:titleTextColor">@color/white</item>
+    </style>
 </resources>

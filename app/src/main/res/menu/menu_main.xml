@@ -12,4 +12,5 @@
     android:title="Clear Flashcards"
     android:showAsAction="ifRoom"/>
 
+
 </menu>
